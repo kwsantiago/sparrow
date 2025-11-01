@@ -17,6 +17,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -67,6 +68,9 @@ public class GeneralSettingsController extends SettingsDetailController {
 
     @FXML
     private UnlabeledToggleSwitch checkNewVersions;
+
+    @FXML
+    private UnlabeledToggleSwitch preventScreenCapture;
 
     private final ChangeListener<Currency> fiatCurrencyListener = new ChangeListener<Currency>() {
         @Override
@@ -186,6 +190,17 @@ public class GeneralSettingsController extends SettingsDetailController {
         checkNewVersions.selectedProperty().addListener((observableValue, oldValue, newValue) -> {
             config.setCheckNewVersions(newValue);
             EventManager.get().post(new VersionCheckStatusEvent(newValue));
+        });
+
+        preventScreenCapture.setSelected(config.isPreventScreenCapture());
+        preventScreenCapture.selectedProperty().addListener((observableValue, oldValue, newValue) -> {
+            config.setPreventScreenCapture(newValue);
+            if(oldValue != null) {
+                String status = newValue ? "enabled" : "disabled";
+                AppServices.showAlertDialog("Restart Required",
+                    "Screen capture protection has been " + status + ".\n\nPlease restart Sparrow for this change to take effect.",
+                    Alert.AlertType.INFORMATION);
+            }
         });
     }
 

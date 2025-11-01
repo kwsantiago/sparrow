@@ -53,6 +53,7 @@ public class Config {
     private boolean showDeprecatedImportExport = false;
     private boolean signBsmsExports = false;
     private boolean preventSleep = false;
+    private boolean preventScreenCapture = false;
     private Boolean connectToBroadcast;
     private Boolean connectToResolve;
     private Boolean suggestSendToMany;
@@ -354,6 +355,15 @@ public class Config {
 
     public void setPreventSleep(boolean preventSleep) {
         this.preventSleep = preventSleep;
+        flush();
+    }
+
+    public boolean isPreventScreenCapture() {
+        return preventScreenCapture;
+    }
+
+    public void setPreventScreenCapture(boolean preventScreenCapture) {
+        this.preventScreenCapture = preventScreenCapture;
         flush();
     }
 

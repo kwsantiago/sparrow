@@ -99,5 +99,11 @@
                 <HelpLabel helpText="Check for updates to Sparrow?"/>
             </Field>
         </Fieldset>
+        <Fieldset inputGrow="SOMETIMES" text="Privacy" styleClass="wideLabelFieldSet">
+            <Field text="Prevent screen capture:">
+                <UnlabeledToggleSwitch fx:id="preventScreenCapture" />
+                <HelpLabel helpText="Prevent screenshots and screen recordings of Sparrow (requires restart). Effective on Windows 10+, partial support on macOS, not supported on Linux."/>
+            </Field>
+        </Fieldset>
     </Form>
 </GridPane>

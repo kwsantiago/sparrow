@@ -599,6 +599,10 @@ public class AppServices {
 
             appController.initializeView();
             stage.show();
+
+            // Apply screen capture protection after stage is shown
+            ScreenCaptureProtection.setProtection(stage, Config.get().isPreventScreenCapture());
+
             return appController;
         } catch(IOException e) {
             log.error("Could not load app FXML", e);
